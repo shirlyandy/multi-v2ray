@@ -117,6 +117,12 @@ docker exec v2ray bash -c "v2ray info"
 ```
 systemctl stop firewalld.service
 systemctl disable firewalld.service
+
+## 也可以添加开放端口
+## 查看已开放端口
+firewall-cmd --zone=public --list-ports
+## 添加开放端口
+firewall-cmd --zone=public --add-port=80/tcp --permanent
 ```
 
 ## 变更记录
