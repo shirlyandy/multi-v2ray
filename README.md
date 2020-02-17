@@ -113,19 +113,51 @@ docker run -d --name v2ray --privileged -v /path/config.json:/etc/v2ray/config.j
 docker exec v2ray bash -c "v2ray info"
 ```
 
-**warning**: 如果用centos，需要先关闭防火墙
+**warning：**如果用centos，需要先关闭防火墙
+
 ```
 systemctl stop firewalld.service
 systemctl disable firewalld.service
 
 ## 也可以添加开放端口
+
 ## 查看已开放端口
 firewall-cmd --zone=public --list-ports
 ## 添加开放端口
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 ```
 
+**warning：**服务器与客户端时间相差不能超过1分钟，需要设置时间，使用chrony时间同步工具
+
+```
+yum install chrony -y
+
+# 删除默认Server 
+sed -i "/server/d" /etc/chrony.conf
+
+# 增加阿里云时间服务器
+sed -i '$a\server ntp.aliyun.com iburst' /etc/chrony.conf
+
+# 重启chronyd
+systemctl restart chronyd
+
+# 检测是否正常
+chronyc tracking
+
+# 修改时区
+timedatectl set-timezone Asia/Shanghai
+
+# 将你的硬件时钟设置为本地时区
+timedatectl set-local-rtc 1
+
+# 查看日期时间、时区及NTP状态
+timedatectl
+```
+
+
+
 ## 变更记录
+
 查看 [Changelog](https://github.com/Jrohy/multi-v2ray/blob/master/Changelog.md)
 
 ## 依赖
