@@ -113,7 +113,7 @@ docker run -d --name v2ray --privileged -v /path/config.json:/etc/v2ray/config.j
 docker exec v2ray bash -c "v2ray info"
 ```
 
-**warning**:如果用centos，需要先关闭防火墙
+**warning**: 如果用centos，需要先关闭防火墙
 
 ```
 systemctl stop firewalld.service
@@ -127,7 +127,7 @@ firewall-cmd --zone=public --list-ports
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 ```
 
-**warning**:服务器与客户端时间相差不能超过1分钟，需要设置时间，使用chrony时间同步工具
+**warning**: 服务器与客户端时间相差不能超过1分钟，需要设置时间，使用chrony时间同步工具
 
 ```
 yum install chrony -y
